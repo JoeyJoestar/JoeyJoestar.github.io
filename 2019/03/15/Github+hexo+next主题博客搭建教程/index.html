@@ -100,7 +100,7 @@
 <meta property="og:image" content="https://joeyjoestar.github.io/img/20190316011.png">
 <meta property="og:image" content="https://joeyjoestar.github.io/img/20190316012.png">
 <meta property="og:image" content="https://joeyjoestar.github.io/img/20190316013.png">
-<meta property="og:updated_time" content="2019-03-16T03:48:45.542Z">
+<meta property="og:updated_time" content="2019-03-16T06:05:29.462Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Github+hexo+next主题博客搭建教程">
 <meta name="twitter:description" content="本次我会逐步演示如何在Github上搭建自己的静态博客，先看看我之前已经搭建好的博客效果：https://zouchanglin.github.io 很多东西呢只是正对自己喜欢的风格来选择的，比如博客的风格，我自己比较喜欢Next主题的风格，Github上的项目地址是：https://github.com/iissnan/hexo-theme-next ，大家也可以根据自己喜欢的风格自行选择！">
@@ -407,6 +407,7 @@
 <p><img src="/img/20190316012.png" alt="图片"></p>
 <p>于是博客根目录下的source文件夹下就出现了about、tags、categories等文件夹，里分别有对应index.md文件</p>
 <h2 id="安装妹子"><a href="#安装妹子" class="headerlink" title="安装妹子"></a>安装妹子</h2><p><img src="/img/20190316013.png" alt="图片"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-helper-live2d</span><br><span class="line">npm install live2d-widget-model-hibiki</span><br></pre></td></tr></table></figure>
 <p>在hexo的配置文件后面添加</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 2d妹子</span></span><br><span class="line">live2d:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  scriptFrom: <span class="built_in">local</span></span><br><span class="line">  pluginRootPath: live2dw/</span><br><span class="line">  pluginJsPath: lib/</span><br><span class="line">  pluginModelPath: assets/</span><br><span class="line">  tagMode: <span class="literal">false</span></span><br><span class="line">  debug: <span class="literal">false</span></span><br><span class="line">  model:</span><br><span class="line">    use: live2d-widget-model-hibiki</span><br><span class="line">  display:</span><br><span class="line">    position: right</span><br><span class="line">    width: 150</span><br><span class="line">    height: 350</span><br><span class="line">  mobile:</span><br><span class="line">    show: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 
@@ -770,5 +771,5 @@
 
   <!-- 页面点击小红心 -->
 <script type="text/javascript" src="/js/src/clicks.js"></script>
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":350},"mobile":{"show":true},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":350},"mobile":{"show":false},"log":false});</script></body>
 </html>
