@@ -91,16 +91,16 @@
 <meta property="og:image" content="https://joeyjoestar.github.io/img/20190316003.png">
 <meta property="og:image" content="https://joeyjoestar.github.io/img/20190316004.png">
 <meta property="og:image" content="https://joeyjoestar.github.io/img/20190316005.png">
-<meta property="og:image" content="https://joeyjoestar.github.io/img/20190316006.png">
+<meta property="og:image" content="https://joeyjoestar.github.io/img/20190316006.PNG">
 <meta property="og:image" content="https://joeyjoestar.github.io/img/20190316007.png">
-<meta property="og:image" content="https://joeyjoestar.github.io/img/20190316008.png">
-<meta property="og:image" content="https://joeyjoestar.github.io/img/20190316009.png">
-<meta property="og:image" content="https://joeyjoestar.github.io/img/20190316009.png">
+<meta property="og:image" content="https://joeyjoestar.github.io/img/20190316008.PNG">
+<meta property="og:image" content="https://joeyjoestar.github.io/img/20190316009.PNG">
 <meta property="og:image" content="https://joeyjoestar.github.io/img/20190316010.png">
+<meta property="og:image" content="https://joeyjoestar.github.io/img/20190316014.png">
 <meta property="og:image" content="https://joeyjoestar.github.io/img/20190316011.png">
 <meta property="og:image" content="https://joeyjoestar.github.io/img/20190316012.png">
 <meta property="og:image" content="https://joeyjoestar.github.io/img/20190316013.png">
-<meta property="og:updated_time" content="2019-03-16T06:05:29.462Z">
+<meta property="og:updated_time" content="2019-03-16T12:21:30.551Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Github+hexo+next主题博客搭建教程">
 <meta name="twitter:description" content="本次我会逐步演示如何在Github上搭建自己的静态博客，先看看我之前已经搭建好的博客效果：https://zouchanglin.github.io 很多东西呢只是正对自己喜欢的风格来选择的，比如博客的风格，我自己比较喜欢Next主题的风格，Github上的项目地址是：https://github.com/iissnan/hexo-theme-next ，大家也可以根据自己喜欢的风格自行选择！">
@@ -362,7 +362,7 @@
 <p><img src="/img/20190316005.png" alt="图片"></p>
 <p>出现上面的页面就意味着我们成功了一半！</p>
 <h2 id="Github博客仓库的建立"><a href="#Github博客仓库的建立" class="headerlink" title="Github博客仓库的建立"></a>Github博客仓库的建立</h2><h3 id="申请一个Github账号"><a href="#申请一个Github账号" class="headerlink" title="申请一个Github账号"></a>申请一个Github账号</h3><p><a href="https://github.com/github" target="_blank" rel="noopener">https://github.com/github</a> 打开网址申请账户</p>
-<h3 id="正式建立博客仓库"><a href="#正式建立博客仓库" class="headerlink" title="正式建立博客仓库"></a>正式建立博客仓库</h3><p><img src="/img/20190316006.png" alt="图片"></p>
+<h3 id="正式建立博客仓库"><a href="#正式建立博客仓库" class="headerlink" title="正式建立博客仓库"></a>正式建立博客仓库</h3><p><img src="/img/20190316006.PNG" alt="图片"></p>
 <p>注意仓库名称一定是<strong>你的Github用户名.github.io</strong>才是可以的</p>
 <p>我的用户名是JoeyJoestar，仓库名称就是JoeyJoestar.github.io</p>
 <p>此时在浏览器输入<a href="https://joeyjoestar.github.io/">https://joeyjoestar.github.io/</a>，应该就会看到你的Github主页。</p>
@@ -377,19 +377,19 @@
 </ul>
 <p><img src="/img/20190316007.png" alt="图片"></p>
 <p>找到刚才生成的ssh密匙文件，复制其中的全部内容</p>
-<p><img src="/img/20190316008.png" alt="图片"></p>
+<p><img src="/img/20190316008.PNG" alt="图片"></p>
 <p>从Github页面右上角的用户头像中进入设置页面</p>
-<p><img src="/img/20190316009.png" alt="图片"></p>
+<p><img src="/img/20190316009.PNG" alt="图片"></p>
 <p>点击左侧设置栏中的SSH and GPG keys 对SSH进行设置</p>
 <p>Title随便填写，Key中粘贴刚才复制的密钥，然后点击Add SSH key</p>
 <p>会让你再次输入一遍Github的密码</p>
 <h3 id="配置Deploy"><a href="#配置Deploy" class="headerlink" title="配置Deploy"></a>配置Deploy</h3><p>在博客根目录下找到_config.yml文件中，找到deploy，修改为</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:JoeyJoestar/JoeyJoestar.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
 <h2 id="开始部署"><a href="#开始部署" class="headerlink" title="开始部署"></a>开始部署</h2><p>当上述操作都完成之后，输入命令 <strong>hexo g</strong> 重新生成一下,然后使用命令<strong>hexo d</strong> 部署到Github远程仓库，这个时候一般会遇到一个问题：</p>
-<p><img src="/img/20190316009.png" alt="图片"></p>
+<p><img src="/img/20190316010.png" alt="图片"></p>
 <p>这个时候我们需要执行一条命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
-<p><img src="/img/20190316010.png" alt="图片"></p>
+<p><img src="/img/20190316014.png" alt="图片"></p>
 <p>出现上图则说明安装成功，接着我们就可以直接使用命令<strong>hexo d</strong>部署了，首次使用ssh密匙的时候，需要我们输入一个yes确认一下</p>
 <p><img src="/img/20190316011.png" alt="图片"></p>
 <p>接下来，看看我们部署的效果：https://你的Github用户名.github.io 由于我们还未安装自己的主题，所以看到的是hexo的默认主题，效果如下，如果暂时无法部署远程仓库的话就只能在本地使用<strong>hexo s</strong>开启服务器，然后访问<a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000/</a> 来查看效果!</p>
