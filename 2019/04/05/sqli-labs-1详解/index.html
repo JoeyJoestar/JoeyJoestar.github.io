@@ -87,24 +87,24 @@
 <meta property="og:site_name" content="猛男">
 <meta property="og:description" content="前言虽然是从0开始，但还是需要一点sql语句的知识的，起码能看懂这些代码在干什么。好了，废话不多说，开始第一题的讲解。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://joeyjoestar.github.io/sqlilabs/001001.PNG">
-<meta property="og:image" content="https://joeyjoestar.github.io/sqlilabs/001002.PNG">
-<meta property="og:image" content="https://joeyjoestar.github.io/sqlilabs/001004.PNG">
-<meta property="og:image" content="https://joeyjoestar.github.io/sqlilabs/001004.PNG">
-<meta property="og:image" content="https://joeyjoestar.github.io/sqlilabs/001003.PNG">
-<meta property="og:image" content="https://joeyjoestar.github.io/sqlilabs/001005.PNG">
-<meta property="og:image" content="https://joeyjoestar.github.io/sqlilabs/001006.PNG">
-<meta property="og:image" content="https://joeyjoestar.github.io/sqlilabs/001002.PNG">
-<meta property="og:image" content="https://joeyjoestar.github.io/sqlilabs/001002.PNG">
-<meta property="og:image" content="https://joeyjoestar.github.io/sqlilabs/001007.PNG">
-<meta property="og:image" content="https://joeyjoestar.github.io/sqlilabs/001002.PNG">
-<meta property="og:image" content="https://joeyjoestar.github.io/sqlilabs/001008.PNG">
-<meta property="og:image" content="https://joeyjoestar.github.io/sqlilabs/001009.PNG">
-<meta property="og:updated_time" content="2019-04-05T12:14:58.409Z">
+<meta property="og:image" content="https://joeyjoestar.github.io/img/sqlilabs/001001.PNG">
+<meta property="og:image" content="https://joeyjoestar.github.io/img/sqlilabs/001002.PNG">
+<meta property="og:image" content="https://joeyjoestar.github.io/img/sqlilabs/001004.PNG">
+<meta property="og:image" content="https://joeyjoestar.github.io/img/sqlilabs/001004.PNG">
+<meta property="og:image" content="https://joeyjoestar.github.io/img/sqlilabs/001003.PNG">
+<meta property="og:image" content="https://joeyjoestar.github.io/img/sqlilabs/001005.PNG">
+<meta property="og:image" content="https://joeyjoestar.github.io/img/sqlilabs/001006.PNG">
+<meta property="og:image" content="https://joeyjoestar.github.io/img/sqlilabs/001002.PNG">
+<meta property="og:image" content="https://joeyjoestar.github.io/img/sqlilabs/001002.PNG">
+<meta property="og:image" content="https://joeyjoestar.github.io/img/sqlilabs/001007.PNG">
+<meta property="og:image" content="https://joeyjoestar.github.io/img/sqlilabs/001002.PNG">
+<meta property="og:image" content="https://joeyjoestar.github.io/img/sqlilabs/001008.PNG">
+<meta property="og:image" content="https://joeyjoestar.github.io/img/sqlilabs/001009.PNG">
+<meta property="og:updated_time" content="2019-04-05T12:22:28.431Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sqli-labs-1详解">
 <meta name="twitter:description" content="前言虽然是从0开始，但还是需要一点sql语句的知识的，起码能看懂这些代码在干什么。好了，废话不多说，开始第一题的讲解。">
-<meta name="twitter:image" content="https://joeyjoestar.github.io/sqlilabs/001001.PNG">
+<meta name="twitter:image" content="https://joeyjoestar.github.io/img/sqlilabs/001001.PNG">
 
 
 
@@ -400,10 +400,10 @@
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>虽然是从0开始，但还是需要一点sql语句的知识的，起码能看懂这些代码在干什么。好了，废话不多说，开始第一题的讲解。</p>
 <a id="more"></a>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><img src="/sqlilabs/001001.PNG" alt></p>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><img src="/img/sqlilabs/001001.PNG" alt></p>
 <p>这道题中，黄色提示的意思是将ID作为参数传入，且这个ID的值要用数字。</p>
 <h2 id="解答过程"><a href="#解答过程" class="headerlink" title="解答过程"></a>解答过程</h2><h3 id="初次尝试"><a href="#初次尝试" class="headerlink" title="初次尝试"></a>初次尝试</h3><p>在浏览器的地址栏中<code>http://127.0.0.1/sqli/Less-1/</code>在后面直接跟上<code>?id=1</code>，进行尝试</p>
-<p><img src="/sqlilabs/001002.PNG" alt></p>
+<p><img src="/img/sqlilabs/001002.PNG" alt></p>
 <p>很好，出现了登录名和密码。</p>
 <p>将id分别输入2、3、4，都出现了不同的结果</p>
 <h3 id="后台发生什么"><a href="#后台发生什么" class="headerlink" title="后台发生什么"></a>后台发生什么</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> login_name, <span class="keyword">password</span> <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> <span class="keyword">id</span> = 我们输入的值</span><br><span class="line"><span class="keyword">select</span> login_name, <span class="keyword">password</span> <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> <span class="keyword">id</span> = <span class="number">1</span></span><br><span class="line"><span class="keyword">select</span> login_name, <span class="keyword">password</span> <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> <span class="keyword">id</span> = <span class="number">2</span></span><br><span class="line"><span class="keyword">select</span> login_name, <span class="keyword">password</span> <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> <span class="keyword">id</span> = <span class="number">3</span></span><br><span class="line"><span class="keyword">select</span> login_name, <span class="keyword">password</span> <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> <span class="keyword">id</span> = <span class="number">4</span></span><br></pre></td></tr></table></figure>
@@ -413,15 +413,15 @@
 <h3 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h3><p>现在开始尝试一些比较”出格”的id使sql报错。</p>
 <p>看看能不能从数据库的反馈中获得有用的信息。</p>
 <p>试试更大的数字<code>?id=20</code></p>
-<p><img src="/sqlilabs/001004.PNG" alt></p>
+<p><img src="/img/sqlilabs/001004.PNG" alt></p>
 <p>登录名和密码消失了，没有提示错误信息</p>
 <p>试试字符串<code>id=good</code></p>
-<p><img src="/sqlilabs/001004.PNG" alt></p>
+<p><img src="/img/sqlilabs/001004.PNG" alt></p>
 <p>同样没有任何提示</p>
 <p>字符串和数字都试过了，开始尝试输入一些特殊符号。</p>
 <p>比如说”、’、\之类的符号。</p>
 <p>在现在的地址栏的后面再添加一个英文的单引号<code>&#39;</code>。</p>
-<p><img src="/sqlilabs/001003.PNG" alt></p>
+<p><img src="/img/sqlilabs/001003.PNG" alt></p>
 <p>提示我们有SQL语法错误，<code>&#39;&#39;1&#39;&#39; LIMIT 0,1&#39;</code>，出错的语法是这个，下面我们来分析一下为什么会出现错误。</p>
 <h3 id="错误分析"><a href="#错误分析" class="headerlink" title="错误分析"></a>错误分析</h3><h4 id="39-39-1-39-39-的分析"><a href="#39-39-1-39-39-的分析" class="headerlink" title="&#39;&#39;1&#39;&#39;的分析"></a><code>&#39;&#39;1&#39;&#39;</code>的分析</h4><p>1左右两边各有两个单引号，我们可以先在中间填充一些空格，这样可以使我们更好地看出他们的区别。</p>
 <p><code>&#39;  &#39;  1&#39;   &#39;LIMIT 0,1&#39;</code></p>
@@ -432,7 +432,7 @@
 <p><code>1&#39;</code></p>
 <p>这就是报错的原因，因为我们在1后面加了一个单引号，导致1后面多出了一个单引号。</p>
 <h4 id="再次检验"><a href="#再次检验" class="headerlink" title="再次检验"></a>再次检验</h4><p>为了检测我们的判断是否正确，这次我们将单引号替换为斜杠 \，如果我们的判断是正确的，那么1右边的第一个单引号会变成斜杠。</p>
-<p><img src="/sqlilabs/001005.PNG" alt></p>
+<p><img src="/img/sqlilabs/001005.PNG" alt></p>
 <p><code>&#39;  1\&#39;LIMIT 0,1</code></p>
 <p>1右边的引号被反斜杠转义了，这样也会报错，因为只剩下了左边的单引号</p>
 <h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p>封装这个命令的开发人员很显然在我们输入的id周围添加了两个单引号，只不过我们看不到而已。</p>
@@ -448,7 +448,7 @@
 <p>3、<code>/*    */</code></p>
 <p>我们先来试一下第一种</p>
 <p><code>······/Less-1/?id=1&#39;--</code></p>
-<p><img src="/sqlilabs/001006.PNG" alt></p>
+<p><img src="/img/sqlilabs/001006.PNG" alt></p>
 <p>报错了</p>
 <p><code>--</code>并没有起到我们想要的效果。</p>
 <p>这是因为我们不是直接与数据库进行交互</p>
@@ -458,7 +458,7 @@
 <p>URL编码中<code>%20</code>代表的就是空格</p>
 <p>再试一次</p>
 <p><code>······/Less-1/?id=1&#39;--%20</code></p>
-<p><img src="/sqlilabs/001002.PNG" alt></p>
+<p><img src="/img/sqlilabs/001002.PNG" alt></p>
 <p>好了成功了</p>
 <p>也可以使用<code>#</code>来注释</p>
 <p><code>#</code>的URL编码是<code>%23</code></p>
@@ -478,7 +478,7 @@
 <p>发挥之后，把B注释掉就行了</p>
 <p>这就是SQL注入的原理，下面的内容就真的必须要懂SQL的语法了，越花里胡哨越NB</p>
 <h3 id="尝试SQL注入"><a href="#尝试SQL注入" class="headerlink" title="尝试SQL注入"></a>尝试SQL注入</h3><p>地址栏中输入<code>?id=1&#39;%20 and 1=1%23</code></p>
-<p><img src="/sqlilabs/001002.PNG" alt></p>
+<p><img src="/img/sqlilabs/001002.PNG" alt></p>
 <p>好了，跟我想的一样没问题</p>
 <h3 id="能干什么"><a href="#能干什么" class="headerlink" title="能干什么"></a>能干什么</h3><p>这是在使用SQL语句从数据库中提取信息然后展示在前端页面上</p>
 <p>提取出来的信息可能是文字，也可能是图像</p>
@@ -488,7 +488,7 @@
 <p>因为开发者在页面中展示了login_name和password</p>
 <p>所以我才至少有两列，其中两列的名称很可能是login_name和password，当然这只是猜测</p>
 <p>使用<code>?id=1&#39;%20 order by 1%23</code>，从1到n一直猜测，直到报错，n-1就是数据表的列数</p>
-<p><img src="/sqlilabs/001007.PNG" alt></p>
+<p><img src="/img/sqlilabs/001007.PNG" alt></p>
 <p>在n=4的时候报错了，那么我们可以知道这个数据表只有3列</p>
 <p>后台的SQL代码为</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">col</span><span class="number">-1</span>, <span class="keyword">col</span><span class="number">-2</span>,<span class="keyword">col</span><span class="number">-3</span> <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> <span class="keyword">id</span> = <span class="string">'我们输入的值'</span></span><br></pre></td></tr></table></figure>
@@ -496,19 +496,19 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">col</span><span class="number">-1</span>, <span class="keyword">col</span><span class="number">-2</span>,<span class="keyword">col</span><span class="number">-3</span> <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> <span class="keyword">id</span> = <span class="string">'1'</span> 插入的代码 %<span class="number">23</span><span class="string">'</span></span><br></pre></td></tr></table></figure>
 <h3 id="union-select"><a href="#union-select" class="headerlink" title="union select"></a>union select</h3><p><code>?id=1&#39;%20 union select 1,2,3%23</code></p>
 <p>利用union select的性质，看看1,2,3能不能在页面上显示出来</p>
-<p><img src="/sqlilabs/001002.PNG" alt></p>
+<p><img src="/img/sqlilabs/001002.PNG" alt></p>
 <p>没变化，这是为什么？</p>
 <p>因为id=1是true</p>
 <p>1,2,3也是true</p>
 <p>后台优先显示id=1的结果</p>
 <p>如果id的值是一个比较大的数，或者是一个负数，union select的结果就能显示出来了</p>
 <p><code>?id=9999999&#39;%20 union select 1,2,3%23</code></p>
-<p><img src="/sqlilabs/001008.PNG" alt></p>
+<p><img src="/img/sqlilabs/001008.PNG" alt></p>
 <p>好了，这就是我想要的</p>
 <p>如果我们想获取数据库里的其他信息，我们就需要利用2和3这两个位置</p>
 <p>将其替换为其他代码</p>
 <h3 id="获取数据库版本和名字"><a href="#获取数据库版本和名字" class="headerlink" title="获取数据库版本和名字"></a>获取数据库版本和名字</h3><p><code>?id=-1&#39; union select 1,version(),database()%23</code></p>
-<p><img src="/sqlilabs/001009.PNG" alt></p>
+<p><img src="/img/sqlilabs/001009.PNG" alt></p>
 <p>这下我们知道当前数据库的版本是5.5.53，名字是security</p>
 <p>你对SQL语句越熟悉，你获取的信息就越多</p>
 
