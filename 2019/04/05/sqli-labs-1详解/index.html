@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="httpserver,python,">
+  <meta name="keywords" content="sql注入,">
 
 
 
@@ -79,18 +79,32 @@
 
 
 
-<meta name="description" content="先查看python的版本 如果是2.7 cmd命令行输入python -m SimpleHTTPServer 8989 如果是3.7 cmd命令行输入python -m http.server 8989">
-<meta name="keywords" content="httpserver,python">
+<meta name="description" content="前言虽然是从0开始，但还是需要一点sql语句的知识的，起码能看懂这些代码在干什么。好了，废话不多说，开始第一题的讲解。">
+<meta name="keywords" content="sql注入">
 <meta property="og:type" content="article">
-<meta property="og:title" content="开启httpserver">
-<meta property="og:url" content="https://joeyjoestar.github.io/2019/03/18/开启httpserver/index.html">
+<meta property="og:title" content="sqli-labs-1详解">
+<meta property="og:url" content="https://joeyjoestar.github.io/2019/04/05/sqli-labs-1详解/index.html">
 <meta property="og:site_name" content="猛男">
-<meta property="og:description" content="先查看python的版本 如果是2.7 cmd命令行输入python -m SimpleHTTPServer 8989 如果是3.7 cmd命令行输入python -m http.server 8989">
+<meta property="og:description" content="前言虽然是从0开始，但还是需要一点sql语句的知识的，起码能看懂这些代码在干什么。好了，废话不多说，开始第一题的讲解。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-25T01:17:15.154Z">
+<meta property="og:image" content="d:/hexo/source/sqlilabs/001001.PNG">
+<meta property="og:image" content="d:/hexo/source/sqlilabs/001002.PNG">
+<meta property="og:image" content="d:/hexo/source/sqlilabs/001004.PNG">
+<meta property="og:image" content="d:/hexo/source/sqlilabs/001004.PNG">
+<meta property="og:image" content="d:/hexo/source/sqlilabs/001003.PNG">
+<meta property="og:image" content="d:/hexo/source/sqlilabs/001005.PNG">
+<meta property="og:image" content="d:/hexo/source/sqlilabs/001006.PNG">
+<meta property="og:image" content="d:/hexo/source/sqlilabs/001002.PNG">
+<meta property="og:image" content="d:/hexo/source/sqlilabs/001002.PNG">
+<meta property="og:image" content="d:/hexo/source/sqlilabs/001007.PNG">
+<meta property="og:image" content="d:/hexo/source/sqlilabs/001002.PNG">
+<meta property="og:image" content="d:/hexo/source/sqlilabs/001008.PNG">
+<meta property="og:image" content="d:/hexo/source/sqlilabs/001009.PNG">
+<meta property="og:updated_time" content="2019-04-05T12:10:00.057Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="开启httpserver">
-<meta name="twitter:description" content="先查看python的版本 如果是2.7 cmd命令行输入python -m SimpleHTTPServer 8989 如果是3.7 cmd命令行输入python -m http.server 8989">
+<meta name="twitter:title" content="sqli-labs-1详解">
+<meta name="twitter:description" content="前言虽然是从0开始，但还是需要一点sql语句的知识的，起码能看懂这些代码在干什么。好了，废话不多说，开始第一题的讲解。">
+<meta name="twitter:image" content="d:/hexo/source/sqlilabs/001001.PNG">
 
 
 
@@ -120,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="https://joeyjoestar.github.io/2019/03/18/开启httpserver/">
+  <link rel="canonical" href="https://joeyjoestar.github.io/2019/04/05/sqli-labs-1详解/">
 
 
 
 
 
-  <title>开启httpserver | 猛男</title>
+  <title>sqli-labs-1详解 | 猛男</title>
   
 
 
@@ -295,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://joeyjoestar.github.io/2019/03/18/开启httpserver/">
+    <link itemprop="mainEntityOfPage" href="https://joeyjoestar.github.io/2019/04/05/sqli-labs-1详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Joey Joestar">
@@ -312,7 +326,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">开启httpserver</h1>
+          <h1 class="post-title" itemprop="name headline">sqli-labs-1详解</h1>
         
 
         <div class="post-meta">
@@ -324,8 +338,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-18T15:21:11+08:00">
-                2019-03-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-05T08:38:29+08:00">
+                2019-04-05
               </time>
             
 
@@ -347,8 +361,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/基础教程/" itemprop="url" rel="index">
-                    <span itemprop="name">基础教程</span>
+                  <a href="/categories/从0开始学注入/" itemprop="url" rel="index">
+                    <span itemprop="name">从0开始学注入</span>
                   </a>
                 </span>
 
@@ -384,11 +398,119 @@
       
 
       
-        <p>先查看python的版本</p>
-<p>如果是2.7</p>
-<p>cmd命令行输入<code>python -m SimpleHTTPServer 8989</code></p>
-<p>如果是3.7</p>
-<p>cmd命令行输入<code>python -m http.server 8989</code></p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>虽然是从0开始，但还是需要一点sql语句的知识的，起码能看懂这些代码在干什么。好了，废话不多说，开始第一题的讲解。</p>
+<a id="more"></a>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><img src="D:\hexo\source\sqlilabs\001001.PNG" alt></p>
+<p>这道题中，黄色提示的意思是将ID作为参数传入，且这个ID的值要用数字。</p>
+<h2 id="解答过程"><a href="#解答过程" class="headerlink" title="解答过程"></a>解答过程</h2><h3 id="初次尝试"><a href="#初次尝试" class="headerlink" title="初次尝试"></a>初次尝试</h3><p>在浏览器的地址栏中<code>http://127.0.0.1/sqli/Less-1/</code>在后面直接跟上<code>?id=1</code>，进行尝试</p>
+<p><img src="D:\hexo\source\sqlilabs\001002.PNG" alt></p>
+<p>很好，出现了登录名和密码。</p>
+<p>将id分别输入2、3、4，都出现了不同的结果</p>
+<h3 id="后台发生什么"><a href="#后台发生什么" class="headerlink" title="后台发生什么"></a>后台发生什么</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> login_name, <span class="keyword">password</span> <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> <span class="keyword">id</span> = 我们输入的值</span><br><span class="line"><span class="keyword">select</span> login_name, <span class="keyword">password</span> <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> <span class="keyword">id</span> = <span class="number">1</span></span><br><span class="line"><span class="keyword">select</span> login_name, <span class="keyword">password</span> <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> <span class="keyword">id</span> = <span class="number">2</span></span><br><span class="line"><span class="keyword">select</span> login_name, <span class="keyword">password</span> <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> <span class="keyword">id</span> = <span class="number">3</span></span><br><span class="line"><span class="keyword">select</span> login_name, <span class="keyword">password</span> <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> <span class="keyword">id</span> = <span class="number">4</span></span><br></pre></td></tr></table></figure>
+<p>可以想象，在后台应该是执行了这样的sql查询语句。</p>
+<p>而且开发这个网站的人假定了用户会输入<span style="color:red;">数字型的id。</span></p>
+<p>如果我们不按开发人员的想法走呢？</p>
+<h3 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h3><p>现在开始尝试一些比较”出格”的id使sql报错。</p>
+<p>看看能不能从数据库的反馈中获得有用的信息。</p>
+<p>试试更大的数字<code>?id=20</code></p>
+<p><img src="D:\hexo\source\sqlilabs\001004.PNG" alt></p>
+<p>登录名和密码消失了，没有提示错误信息</p>
+<p>试试字符串<code>id=good</code></p>
+<p><img src="D:\hexo\source\sqlilabs\001004.PNG" alt></p>
+<p>同样没有任何提示</p>
+<p>字符串和数字都试过了，开始尝试输入一些特殊符号。</p>
+<p>比如说”、’、\之类的符号。</p>
+<p>在现在的地址栏的后面再添加一个英文的单引号<code>&#39;</code>。</p>
+<p><img src="D:\hexo\source\sqlilabs\001003.PNG" alt></p>
+<p>提示我们有SQL语法错误，<code>&#39;&#39;1&#39;&#39; LIMIT 0,1&#39;</code>，出错的语法是这个，下面我们来分析一下为什么会出现错误。</p>
+<h3 id="错误分析"><a href="#错误分析" class="headerlink" title="错误分析"></a>错误分析</h3><h4 id="39-39-1-39-39-的分析"><a href="#39-39-1-39-39-的分析" class="headerlink" title="&#39;&#39;1&#39;&#39;的分析"></a><code>&#39;&#39;1&#39;&#39;</code>的分析</h4><p>1左右两边各有两个单引号，我们可以先在中间填充一些空格，这样可以使我们更好地看出他们的区别。</p>
+<p><code>&#39;  &#39;  1&#39;   &#39;LIMIT 0,1&#39;</code></p>
+<p>如果sql语法基础，我们就会明白<code>LIMIT 0,1</code>两边的单引号不可能是一对。</p>
+<p>事实上这段代码中最左边和最右边的两个单引号是一对，分析问题的时候我们可以忽略他们，看看剩下的代码是什么样子</p>
+<p><code>&#39;  1&#39;   &#39;LIMIT 0,1</code></p>
+<p>这下就剩下3个单引号了。同样，最左边和最右边的单引号是一对，那么就只剩下</p>
+<p><code>1&#39;</code></p>
+<p>这就是报错的原因，因为我们在1后面加了一个单引号，导致1后面多出了一个单引号。</p>
+<h4 id="再次检验"><a href="#再次检验" class="headerlink" title="再次检验"></a>再次检验</h4><p>为了检测我们的判断是否正确，这次我们将单引号替换为斜杠 \，如果我们的判断是正确的，那么1右边的第一个单引号会变成斜杠。</p>
+<p><img src="D:\hexo\source\sqlilabs\001005.PNG" alt></p>
+<p><code>&#39;  1\&#39;LIMIT 0,1</code></p>
+<p>1右边的引号被反斜杠转义了，这样也会报错，因为只剩下了左边的单引号</p>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p>封装这个命令的开发人员很显然在我们输入的id周围添加了两个单引号，只不过我们看不到而已。</p>
+<p>现在我们知道不管我们输入的id是什么，在后台处理的时候都会在两边各加一个单引号。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> login_name, <span class="keyword">password</span> <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> <span class="keyword">id</span> = <span class="string">'我们输入的值'</span></span><br></pre></td></tr></table></figure>
+<h3 id="利用这一点"><a href="#利用这一点" class="headerlink" title="利用这一点"></a>利用这一点</h3><p>我们要利用的就是<code>&#39;  &#39;  1&#39;   &#39;LIMIT 0,1&#39;</code>，通过一些手段，在这个错误的基础上添加一些特殊字符使他正常运行。</p>
+<p>通常有两种做法</p>
+<p>1、注释掉剩下的那个单引号</p>
+<p>2、或者再添加其他的特殊符号把洞补上</p>
+<p>先从第一种方法来，这种简单。</p>
+<h4 id="注释的方法"><a href="#注释的方法" class="headerlink" title="注释的方法"></a>注释的方法</h4><p>1、<code>--</code></p>
+<p>2、<code>#</code></p>
+<p>3、<code>/*    */</code></p>
+<p>我们先来试一下第一种</p>
+<p><code>······/Less-1/?id=1&#39;--</code></p>
+<p><img src="D:\hexo\source\sqlilabs\001006.PNG" alt></p>
+<p>报错了</p>
+<p><code>--</code>并没有起到我们想要的效果。</p>
+<p>这是因为我们不是直接与数据库进行交互</p>
+<p>我们是通过浏览器的地址栏与网站的后端进行交互，地址栏会将我们输入的内容进行编码，这种编码被称为URL编码。</p>
+<p>这样的话，我们与数据库沟通的过程就受到了一些限制</p>
+<p>其中之一便是当我们使用<code>--</code>进行注释的时候，我们需要在<code>--</code>后面加空格，而且这个空格必须是URL编码的格式。</p>
+<p>URL编码中<code>%20</code>代表的就是空格</p>
+<p>再试一次</p>
+<p><code>······/Less-1/?id=1&#39;--%20</code></p>
+<p><img src="D:\hexo\source\sqlilabs\001002.PNG" alt></p>
+<p>好了成功了</p>
+<p>也可以使用<code>#</code>来注释</p>
+<p><code>#</code>的URL编码是<code>%23</code></p>
+<h3 id="休息一下"><a href="#休息一下" class="headerlink" title="休息一下"></a>休息一下</h3><p>到这时候了，你一定有疑问</p>
+<p>我们做的这些能用来干啥？</p>
+<p>为啥我们要先添加一些奇奇怪怪的字符让数据库报错，然后再通过另一些奇奇怪怪的字符修正错误？    </p>
+<p>如果你没有这些问题，我就当你有了</p>
+<p>好的，我们继续</p>
+<h3 id="两个单引号"><a href="#两个单引号" class="headerlink" title="两个单引号"></a>两个单引号</h3><p>回到一开始，开发人员用两个我们看不见的单引号封装了我们输入的id内容，左边的单引号代表着字符串的开始，右边的代表着字符串的结尾</p>
+<p>在编程语言中，我们通常把字符串放在单引号或双引号里面</p>
+<p>假设我们已经有两个单引号A和B，里面有字符串1，这也是ID的值</p>
+<p>现在我们在字符串1后面添加一个单引号C</p>
+<p>ID的值就成了被A和C包住的一个字符串，剩下了单引号B</p>
+<p>开发者认为但是传入后台的id的值是包裹在A和B之间的</p>
+<p>因此在C和B之间却空出了一大片地方供我们自由发挥</p>
+<p>这里填写的内容就不再是ID的值了，而是可以操作数据库的代码</p>
+<p>发挥之后，把B注释掉就行了</p>
+<p>这就是SQL注入的原理，下面的内容就真的必须要懂SQL的语法了，越花里胡哨越NB</p>
+<h3 id="尝试SQL注入"><a href="#尝试SQL注入" class="headerlink" title="尝试SQL注入"></a>尝试SQL注入</h3><p>地址栏中输入<code>?id=1&#39;%20 and 1=1%23</code></p>
+<p><img src="D:\hexo\source\sqlilabs\001002.PNG" alt></p>
+<p>好了，跟我想的一样没问题</p>
+<h3 id="能干什么"><a href="#能干什么" class="headerlink" title="能干什么"></a>能干什么</h3><p>这是在使用SQL语句从数据库中提取信息然后展示在前端页面上</p>
+<p>提取出来的信息可能是文字，也可能是图像</p>
+<p>只要操作得当，你可以把整个数据库都拿出来</p>
+<p>在此之前，我们需要知道这个数据表有多少列</p>
+<h3 id="order-by-猜测"><a href="#order-by-猜测" class="headerlink" title="order by 猜测"></a>order by 猜测</h3><p>我们可以试着猜一下有多少列</p>
+<p>因为开发者在页面中展示了login_name和password</p>
+<p>所以我才至少有两列，其中两列的名称很可能是login_name和password，当然这只是猜测</p>
+<p>使用<code>?id=1&#39;%20 order by 1%23</code>，从1到n一直猜测，直到报错，n-1就是数据表的列数</p>
+<p><img src="D:\hexo\source\sqlilabs\001007.PNG" alt></p>
+<p>在n=4的时候报错了，那么我们可以知道这个数据表只有3列</p>
+<p>后台的SQL代码为</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">col</span><span class="number">-1</span>, <span class="keyword">col</span><span class="number">-2</span>,<span class="keyword">col</span><span class="number">-3</span> <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> <span class="keyword">id</span> = <span class="string">'我们输入的值'</span></span><br></pre></td></tr></table></figure>
+<p>而我们眼中的这行代码已经变成了</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">col</span><span class="number">-1</span>, <span class="keyword">col</span><span class="number">-2</span>,<span class="keyword">col</span><span class="number">-3</span> <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> <span class="keyword">id</span> = <span class="string">'1'</span> 插入的代码 %<span class="number">23</span><span class="string">'</span></span><br></pre></td></tr></table></figure>
+<h3 id="union-select"><a href="#union-select" class="headerlink" title="union select"></a>union select</h3><p><code>?id=1&#39;%20 union select 1,2,3%23</code></p>
+<p>利用union select的性质，看看1,2,3能不能在页面上显示出来</p>
+<p><img src="D:\hexo\source\sqlilabs\001002.PNG" alt></p>
+<p>没变化，这是为什么？</p>
+<p>因为id=1是true</p>
+<p>1,2,3也是true</p>
+<p>后台优先显示id=1的结果</p>
+<p>如果id的值是一个比较大的数，或者是一个负数，union select的结果就能显示出来了</p>
+<p><code>?id=9999999&#39;%20 union select 1,2,3%23</code></p>
+<p><img src="D:\hexo\source\sqlilabs\001008.PNG" alt></p>
+<p>好了，这就是我想要的</p>
+<p>如果我们想获取数据库里的其他信息，我们就需要利用2和3这两个位置</p>
+<p>将其替换为其他代码</p>
+<h3 id="获取数据库版本和名字"><a href="#获取数据库版本和名字" class="headerlink" title="获取数据库版本和名字"></a>获取数据库版本和名字</h3><p><code>?id=-1&#39; union select 1,version(),database()%23</code></p>
+<p><img src="D:\hexo\source\sqlilabs\001009.PNG" alt></p>
+<p>这下我们知道当前数据库的版本是5.5.53，名字是security</p>
+<p>你对SQL语句越熟悉，你获取的信息就越多</p>
 
       
     </div>
@@ -406,9 +528,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/httpserver/" rel="tag"># httpserver</a>
-          
-            <a href="/tags/python/" rel="tag"># python</a>
+            <a href="/tags/sql注入/" rel="tag"># sql注入</a>
           
         </div>
       
@@ -421,8 +541,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/17/winrar漏洞复现/" rel="next" title="winrar漏洞复现">
-                <i class="fa fa-chevron-left"></i> winrar漏洞复现
+              <a href="/2019/03/31/使用html-php-MySQL完成注册-登录-留言板/" rel="next" title="使用html+php+MySQL完成注册+登录+留言板">
+                <i class="fa fa-chevron-left"></i> 使用html+php+MySQL完成注册+登录+留言板
               </a>
             
           </div>
@@ -430,10 +550,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/19/美杜莎爆破测试/" rel="prev" title="美杜莎爆破测试">
-                美杜莎爆破测试 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -485,8 +601,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -549,6 +674,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-number">2.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解答过程"><span class="nav-number">3.</span> <span class="nav-text">解答过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初次尝试"><span class="nav-number">3.1.</span> <span class="nav-text">初次尝试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后台发生什么"><span class="nav-number">3.2.</span> <span class="nav-text">后台发生什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#报错"><span class="nav-number">3.3.</span> <span class="nav-text">报错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误分析"><span class="nav-number">3.4.</span> <span class="nav-text">错误分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#39-39-1-39-39-的分析"><span class="nav-number">3.4.1.</span> <span class="nav-text">&#39;&#39;1&#39;&#39;的分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#再次检验"><span class="nav-number">3.4.2.</span> <span class="nav-text">再次检验</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#结论"><span class="nav-number">3.4.3.</span> <span class="nav-text">结论</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用这一点"><span class="nav-number">3.5.</span> <span class="nav-text">利用这一点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#注释的方法"><span class="nav-number">3.5.1.</span> <span class="nav-text">注释的方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#休息一下"><span class="nav-number">3.6.</span> <span class="nav-text">休息一下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两个单引号"><span class="nav-number">3.7.</span> <span class="nav-text">两个单引号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尝试SQL注入"><span class="nav-number">3.8.</span> <span class="nav-text">尝试SQL注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#能干什么"><span class="nav-number">3.9.</span> <span class="nav-text">能干什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#order-by-猜测"><span class="nav-number">3.10.</span> <span class="nav-text">order by 猜测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#union-select"><span class="nav-number">3.11.</span> <span class="nav-text">union select</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取数据库版本和名字"><span class="nav-number">3.12.</span> <span class="nav-text">获取数据库版本和名字</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
