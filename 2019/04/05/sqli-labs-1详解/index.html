@@ -100,7 +100,7 @@
 <meta property="og:image" content="https://joeyjoestar.github.io/img/sqlilabs/001002.PNG">
 <meta property="og:image" content="https://joeyjoestar.github.io/img/sqlilabs/001008.PNG">
 <meta property="og:image" content="https://joeyjoestar.github.io/img/sqlilabs/001009.PNG">
-<meta property="og:updated_time" content="2019-04-05T12:24:37.109Z">
+<meta property="og:updated_time" content="2019-04-06T11:32:40.419Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sqli-labs-1详解">
 <meta name="twitter:description" content="前言虽然是从0开始，但还是需要一点sql语句的知识的，起码能看懂这些代码在干什么。好了，废话不多说，开始第一题的讲解。let’s go">
@@ -511,6 +511,9 @@
 <p><img src="/img/sqlilabs/001009.PNG" alt></p>
 <p>这下我们知道当前数据库的版本是5.5.53，名字是security</p>
 <p>你对SQL语句越熟悉，你获取的信息就越多</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>从第一题到第五题，解法都差不多，我就不一一讲解了</p>
+<p>关键是采取一种搞破坏的心态来发现BUG</p>
+<p>在之后的博客中，我会更新我认为有价值的知识点</p>
 
       
     </div>
@@ -550,6 +553,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/06/sql注入常用代码/" rel="prev" title="sql注入常用代码">
+                sql注入常用代码 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -628,7 +635,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -650,7 +657,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -684,7 +691,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-number">2.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解答过程"><span class="nav-number">3.</span> <span class="nav-text">解答过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初次尝试"><span class="nav-number">3.1.</span> <span class="nav-text">初次尝试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后台发生什么"><span class="nav-number">3.2.</span> <span class="nav-text">后台发生什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#报错"><span class="nav-number">3.3.</span> <span class="nav-text">报错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误分析"><span class="nav-number">3.4.</span> <span class="nav-text">错误分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#39-39-1-39-39-的分析"><span class="nav-number">3.4.1.</span> <span class="nav-text">&#39;&#39;1&#39;&#39;的分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#再次检验"><span class="nav-number">3.4.2.</span> <span class="nav-text">再次检验</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#结论"><span class="nav-number">3.4.3.</span> <span class="nav-text">结论</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用这一点"><span class="nav-number">3.5.</span> <span class="nav-text">利用这一点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#注释的方法"><span class="nav-number">3.5.1.</span> <span class="nav-text">注释的方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#休息一下"><span class="nav-number">3.6.</span> <span class="nav-text">休息一下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两个单引号"><span class="nav-number">3.7.</span> <span class="nav-text">两个单引号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尝试SQL注入"><span class="nav-number">3.8.</span> <span class="nav-text">尝试SQL注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#能干什么"><span class="nav-number">3.9.</span> <span class="nav-text">能干什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#order-by-猜测"><span class="nav-number">3.10.</span> <span class="nav-text">order by 猜测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#union-select"><span class="nav-number">3.11.</span> <span class="nav-text">union select</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取数据库版本和名字"><span class="nav-number">3.12.</span> <span class="nav-text">获取数据库版本和名字</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-number">2.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解答过程"><span class="nav-number">3.</span> <span class="nav-text">解答过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初次尝试"><span class="nav-number">3.1.</span> <span class="nav-text">初次尝试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后台发生什么"><span class="nav-number">3.2.</span> <span class="nav-text">后台发生什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#报错"><span class="nav-number">3.3.</span> <span class="nav-text">报错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误分析"><span class="nav-number">3.4.</span> <span class="nav-text">错误分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#39-39-1-39-39-的分析"><span class="nav-number">3.4.1.</span> <span class="nav-text">&#39;&#39;1&#39;&#39;的分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#再次检验"><span class="nav-number">3.4.2.</span> <span class="nav-text">再次检验</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#结论"><span class="nav-number">3.4.3.</span> <span class="nav-text">结论</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用这一点"><span class="nav-number">3.5.</span> <span class="nav-text">利用这一点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#注释的方法"><span class="nav-number">3.5.1.</span> <span class="nav-text">注释的方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#休息一下"><span class="nav-number">3.6.</span> <span class="nav-text">休息一下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两个单引号"><span class="nav-number">3.7.</span> <span class="nav-text">两个单引号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尝试SQL注入"><span class="nav-number">3.8.</span> <span class="nav-text">尝试SQL注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#能干什么"><span class="nav-number">3.9.</span> <span class="nav-text">能干什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#order-by-猜测"><span class="nav-number">3.10.</span> <span class="nav-text">order by 猜测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#union-select"><span class="nav-number">3.11.</span> <span class="nav-text">union select</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取数据库版本和名字"><span class="nav-number">3.12.</span> <span class="nav-text">获取数据库版本和名字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
